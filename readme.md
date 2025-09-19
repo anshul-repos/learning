@@ -3,7 +3,7 @@ This repository will be used for learning content.
 
 # 📂 Repository Structure
 
-- **learnig/**
+- **learning/**
   - **int-prep/**
     - **coding/**
       - **general-topics/**
