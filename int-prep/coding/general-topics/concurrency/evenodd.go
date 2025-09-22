@@ -5,42 +5,52 @@ import (
 	"sync"
 )
 
-func printEven(ch chan int, wg *sync.WaitGroup) {
+// write two go routines to print eeven and odd numbers , also channels
+
+func printEvenNums(numCh chan int, wg *sync.WaitGroup, signal chan struct{}) {
 	defer wg.Done()
-	for num := range ch {
+
+	for num := range numCh {
+		<-signal
 		if num%2 == 0 {
-			fmt.Printf("Even:%d\n", num)
+			fmt.Printf("\n Even : %+v", num)
 		}
+		signal <- struct{}{}
 	}
 }
 
-func printOdd(ch chan int, wg *sync.WaitGroup) {
+func printOddNums(numCh chan int, wg *sync.WaitGroup, signal chan struct{}) {
 	defer wg.Done()
-	for num := range ch {
+
+	for num := range numCh {
+		<-signal
 		if num%2 != 0 {
-			fmt.Printf("Odd:%d\n", num)
+			fmt.Printf("\n Odd : %+v", num)
 		}
+		signal <- struct{}{}
 	}
 }
 
-// func main() {
-// 	fmt.Println()
-// 	chEv := make(chan int)
-// 	chOd := make(chan int)
-// 	var wg sync.WaitGroup
-// 	wg.Add(2)
+func main() {
 
-// 	go printEven(chEv, &wg)
-// 	go printOdd(chOd, &wg)
+	n := 10
+	numCh := make(chan int)
+	signal := make(chan struct{}, 1)
 
-// 	for i := 1; i < 10; i++ {
-// 		chOd <- i
-// 		chEv <- i
-// 	}
+	var wg sync.WaitGroup
 
-// 	close(chEv)
-// 	close(chOd)
-// 	wg.Wait()
+	wg.Add(2)
 
-// 	fmt.Println()
-// }
+	go printEvenNums(numCh, &wg, signal)
+	go printOddNums(numCh, &wg, signal)
+
+	signal <- struct{}{}
+
+	for i := 1; i <= n; i++ {
+		numCh <- i
+	}
+
+	close(numCh)
+	wg.Wait()
+
+}
