@@ -104,3 +104,15 @@ INSERT INTO users (name, age) VALUES ('Anshul', 30);
 SELECT * FROM users;
 
 Exit with \q
+
+
+## Interview Questions:
+
+1. A SQL query to fetch the second largest number from a table: `Using LIMIT and OFFSET (MySQL, PostgreSQL)`
+
+```sql
+    SELECT column_name 
+    FROM table_name 
+    ORDER BY column_name DESC 
+    LIMIT 1 OFFSET 1;
+```
