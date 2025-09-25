@@ -1,21 +1,25 @@
 ## Garbage Collector (GC)
 
-    Garbage Collector (GC) 
-Golang has a built-in garbage collector that runs in the background. It periodically:
-    • Scans the program to identify unused memory.
-    • Frees up that unused memory so it can be reused. 
+- Golang has a built-in garbage collector that runs in the background. It periodically:
+    - Scans the program to identify unused memory.
+    - Frees up that unused memory so it can be reused. 
     
-• The Go GC uses a generational mark-and-sweep algorithm, with a concurrent and tri-color marking approach to minimize pause durations and optimize performance.
+- The Go GC uses a generational `mark-and-sweep` algorithm, with a concurrent and tri-color marking approach to minimize pause durations and optimize performance.
 
-    Generational Mark-and-Sweep Algorithm
+
+`Generational Mark-and-Sweep Algorithm`
 
 The garbage collector in Go doesn't strictly use a generational model (as some other languages do, like Java), but its behavior is optimized for short-lived and long-lived objects:
+
     • Short-Lived Objects: Many objects in programs are created and used quickly (e.g., temporary variables). These are collected faster because the GC prioritizes them.
     • Long-Lived Objects: Objects that stay around longer are checked less frequently, as they are less likely to become garbage.
 
-    Tri-Color Marking Approach
+`Tri-Color Marking Approach`
 
-The tri-color marking approach is a way to efficiently identify which parts of memory can be safely cleaned up. It divides objects into three categories during garbage collection:
+- The tri-color marking approach is a way to efficiently identify which parts of memory can be safely cleaned up. 
+
+- It divides objects into three categories during garbage collection:
+
     • White: Objects that haven’t been checked yet and are candidates for deletion.
     • Gray: Objects that are being checked. These objects are still reachable but may point to other objects that need checking.
     • Black: Objects that are fully checked and still in use (i.e., reachable). These will not be collected.
@@ -23,22 +27,20 @@ The tri-color marking approach is a way to efficiently identify which parts of m
 Process:
 
     1. Start with all objects in white.
+
     2. Move reachable objects to gray and then to black as they are examined.
+
     3. Any objects left in white after the marking phase are unreachable and can be safely collected.
 
 
-• Go's garbage collector works concurrently with your application, meaning it doesn’t completely stop the program to clean up memory. Instead, it does most of its work in parallel with your running code.
+- Go's garbage collector works concurrently with your application, meaning it doesn’t completely stop the program to clean up memory. Instead, it does most of its work in parallel with your running code.
 
 
 
 
 ## Context
 
-
-
-    Context
-
-• A context in Go is a way to pass:
+- A context in Go is a way to pass:
 
     1. request-scoped data
 
@@ -46,20 +48,20 @@ Process:
     
     3. deadlines across API boundaries and between goroutines.
     
-• Context is commonly used in functions that perform long-running or concurrent operations, such as HTTP handlers, database queries, and more.
+- Context is commonly used in functions that perform long-running or concurrent operations, such as HTTP handlers, database queries, and more.
 
-• Types:
+- Types:
 
-    1. context.Background() : used in main entry point of a program where no parent context exist
+    1. `context.Background()` : used in main entry point of a program where no parent context exist
 
-    2. context.TODO():             used when you’re unsure about which context to use
+    2. `context.TODO()`:             used when you’re unsure about which context to use
 
-    3. context.WithCancel():   context that can be manually canceled
+    3. `context.WithCancel()`:   context that can be manually canceled
 
-    4. context.WithTimeout(): context will be automatically canceled when the specified duration elapses
+    4. `context.WithTimeout()`: context will be automatically canceled when the specified duration elapses
 
-    5. context.WithDeadline(): context that will be canceled at the specified time
+    5. `context.WithDeadline()`: context that will be canceled at the specified time
 
-    6. context.WithValue(): context that carries a key-value pair, useful for passing request-scoped data
+    6. `context.WithValue()`: context that carries a key-value pair, useful for passing request-scoped data
     
 
