@@ -714,6 +714,10 @@ Unclosed channels or mismanaged goroutines can cause leaks.
 - `Quit + Done channels` → Send a stop signal via one channel and wait for acknowledgment via another (bi-directional control).
 
 
+### 64. Middleware in Go
+
+Middleware in Go is a function that sits **between the incoming HTTP request and the final handler**. 
+It allows us to perform tasks **before or after the main business logic** without cluttering the handler itself.
 
 
 ---
