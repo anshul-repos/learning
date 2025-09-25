@@ -217,6 +217,10 @@ delete(numMap, num)
 | `*[]T` | Pointer to slice | Modify slice itself |
 | `[]*T` | Slice of pointers | Modify elements via pointer |
 
+- `Use *[]T` when you want to change the slice container itself (grow, reassign).
+
+- `Use []*T` when you want to change the values that the slice points to.
+
 ---
 
 ## 18. Check if Map Contains Key
