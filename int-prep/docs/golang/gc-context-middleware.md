@@ -64,4 +64,71 @@ Process:
 
     6. `context.WithValue()`: context that carries a key-value pair, useful for passing request-scoped data
     
+---
 
+# Middleware in Golang
+
+## 1. Definition
+Middleware in Go is a function that sits **between the incoming HTTP request and the final handler**. It allows us to perform tasks **before or after the main business logic** without cluttering the handler itself.
+
+---
+
+## 2. Why Middleware is Useful
+- **Cross-cutting concerns:** Logging, authentication, error recovery, CORS, rate-limiting, metrics, etc.  
+- **Code reuse:** Write once, use across multiple routes.  
+- **Cleaner handlers:** Handlers focus only on business logic.  
+- **Composable:** Multiple middlewares can be chained in a pipeline.
+
+> Analogy: Think of it as a processing pipeline—each middleware is a station that modifies or validates the request before it reaches the final handler.
+
+---
+
+## 3. Go-Specific Details
+- Middleware wraps `http.Handler` or `http.HandlerFunc`.  
+- Can **modify requests**, **stop execution**, or **inject values into context** for downstream handlers.  
+
+---
+
+## 4. Examples
+
+### Logging Middleware
+
+```go
+func LoggingMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        fmt.Println("Request:", r.Method, r.URL.Path)
+        next.ServeHTTP(w, r)
+    })
+}
+```
+
+### Auth Middleware
+```go
+func AuthMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if r.Header.Get("Authorization") != "secret" {
+            http.Error(w, "Forbidden", http.StatusForbidden)
+            return
+        }
+        next.ServeHTTP(w, r)
+    })
+}
+```
+### Recovery Middleware
+
+```go
+func RecoveryMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        defer func() {
+            if err := recover(); err != nil {
+                http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+            }
+        }()
+        next.ServeHTTP(w, r)
+    })
+}
+```
+
+### 5. Middleware and Dependency Injection
+
+> Middleware can also act like a form of dependency injection because it can inject cross-cutting functionality or shared data (like DB connections, logger, or auth info) into the request context. The handler can then access this data without managing it directly.
