@@ -1,28 +1,37 @@
-    • OOPs Concepts
-        • Encapsulation, Inheritance, Polymorphism, Abstraction
-    • Object-Oriented Design (OOD)
-        • UML Basics
-            ○ Introduction to Unified Modeling Language (UML)
-            ○ Types of UML Diagrams
-        • Important Diagrams for LLD
-            ○ Use Case Diagram (borderline HLD, but often used in both)
-            ○ Class Diagram
-            ○ Sequence Diagram
-            ○ Activity Diagram
-            ○ State Diagram (optional but helpful)
-            ○ Component Diagram (optional, bridges HLD & LLD)
-    • SOLID Principles
-        • Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
-    • Design Patterns
-        • Creational (Factory, Singleton)
-        • Structural (Adapter, Composite)
-        • Behavioral (Observer, Strategy, Command)
-    • Code-Level Design
-        • Interfaces, Modules, Function-level decisions
+## Topics:
+
+- Object-Oriented Design (OOD)
+    - UML Basics
+        ○ Introduction to Unified Modeling Language (UML)
+        ○ Types of UML Diagrams
+    - Important Diagrams for LLD
+        ○ Use Case Diagram (borderline HLD, but often used in both)
+        ○ Class Diagram
+        ○ Sequence Diagram
+        ○ Activity Diagram
+        ○ State Diagram (optional but helpful)
+        ○ Component Diagram (optional, bridges HLD & LLD)
+- OOPs Concepts:
+    - Encapsulation
+    - Inheritance
+    - Polymorphism
+    - Abstraction
+- SOLID Principles
+    - Single Responsibility
+    - Open/Closed
+    - Liskov Substitution
+    - Interface Segregation
+    - Dependency Inversion
+- Design Patterns
+    - Creational (Factory, Singleton)
+    - Structural (Adapter, Composite)
+    - Behavioral (Observer, Strategy, Command)
+- Code-Level Design
+    - Interfaces, Modules, Function-level decisions
         • Error handling, logging, data structures
     
 
-OOPS:
+## OOPS:
 
 OOPS is based on 4 main principles:
 

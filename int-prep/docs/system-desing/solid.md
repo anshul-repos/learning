@@ -32,6 +32,7 @@ type Employee struct {
 
 **✅ Good Example:**  
 Split into smaller structs with clear responsibilities:
+
 ```go
 type EmployeeInfo struct {
     Name   string

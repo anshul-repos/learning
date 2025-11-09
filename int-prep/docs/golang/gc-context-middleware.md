@@ -37,6 +37,13 @@ Process:
 
 
 
+### How does the current GC work
+
+The current GC runs in two phases — `Mark and Sweep`. 
+
+- In the Mark phase, we assume all objects to be white (unreachable). We start at the root objects (constants etc), mark them as grey. All grey objects are are added to a queue to be processed. We pick a grey object from the queue and start processing it’s children. As soon as a child is marked grey, it’s added to the queue and the parent is marked black. At the end, we have a mix of black and grey accessible objects. 
+
+- In the Sweep phase, we find all the inaccessible white objects (garbage) and clean it.
 
 ## Context
 
